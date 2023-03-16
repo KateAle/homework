@@ -5,9 +5,13 @@ public class Task4 {
         // задание 4
         // Найти сумму цифр 2х значного числа
 
-        System.out.println(57 %14);
-        int a = 15 , b = 6;
-        System.out.println(a % b);
+        // System.out.println(57 %14);
+        int a = 25 ;
+        int b = a / 10;
+        int c = a % 10;
+
+        System.out.println(b + c );
+
 
     }
 }
