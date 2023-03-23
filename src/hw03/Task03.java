@@ -21,7 +21,7 @@ public class Task03 {
         while ( w != userNumber) {
             if (userNumber == 0) break;
             if ( userNumber < w) System.out.println( "Загаданное число больше "+userNumber);
-            if ( userNumber > w) System.out.println( "Загаданное число меньше "+userNumber);
+            else if ( userNumber > w) System.out.println( "Загаданное число меньше "+userNumber);
             System.out.println( "Следующая попытка : ");
             userNumber = input.nextInt();
         }

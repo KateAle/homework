@@ -11,62 +11,26 @@ import java.util.Scanner;
 public class Task04 {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        /*System.out.println( "Введите число от 2 до 100: ");
 
+        System.out.println("Введите нижнюю границу диапазона: ");
+        int low = in.nextInt();
+        System.out.println("Введите верхнюю границу диапазона: ");
+        int high  = in.nextInt();
+        System.out.println( "Загадайте число в выбранных пределах: ");
         int userNumber = in.nextInt();
-        int x = 100, a=2, n=0 ;
-        if (userNumber < 2 || userNumber > 100) System.out.println("Неверный ввод");
-        else {
-            //for ( int x = 100 ; x != userNumber ; x = x / 2 ) {
-                System.out.println( "Загаданное число равно "+ x + " ?");
-                System.out.println( "1-ДА  0-НЕТ");
+        if (userNumber < low || userNumber > high) System.out.println("Неверный ввод");
 
-                 int que = in.nextInt();
-                 if ( que == 1) System.out.println( "Число отгадано");
-                 if ( que == 0) {
+        while  (low <= high ) {
+            int mid = ( low + high) / 2;
+            System.out.println( "Загаданное число равно "+ mid + " ?  1-ДА  0-НЕТ");
+            int q = in.nextInt();
 
-                     while ( que != 1) {
-
-                         x = x / a;
-                         System.out.println( "Загаданное число равно "+ x + " ?");
-                         que = in.nextInt();
-                         //if ( que == 1) System.out.println( "Число отгадано");
-                         if ( que == 0)
-
-
-                         x = x + x / (int) Math.pow( a, n);
-
-
-                 }
+            if ( q == 1) {System.out.println( "Вы загадали число "+ mid); break;}
+            else  {
+                System.out.println( "Загаданное число больше "+ mid + " ?  1-ДА  0-НЕТ");
+                q = in.nextInt();
+                if ( q == 1 ) low = mid +1;
+                else high = mid -1;
             }
-        }*/
-
-        int x = 50, n=2;
-        int q1 = 0, q2= 0 ;
-
-        while ( q1 == 0) {
-            System.out.println( "Загаданное число равно "+ x + " ?"); //вопрос 1
-            System.out.println( "1-ДА  0-НЕТ");
-
-            q1 = in.nextInt(); //ответ 1
-            if ( q1 == 1) break;
-
-            System.out.println( "Загаданное число больше "+ x + " ?"); //вопрос 2
-            System.out.println( "1-ДА  0-НЕТ");
-
-            q2 = in.nextInt(); //ответ 1
-
-                if (q2 == 1) x= x + 50 / n;
-                else { x= x- 50/n;
-                }
-            n *=n;
-        if ( q1 == 1) System.out.println( "Вы загадали число "+ x );
-
-
-    }
-
-
-
-
-
+        }
 }}
