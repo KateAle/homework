@@ -26,11 +26,12 @@ public static void main(String[] args) {
     group01.recruit(climber02);
     group01.recruit(climber03);
     //group01.getMembers();
-    group01.groupMembers;
+    group01.groupMembers(climber01);
 
     Group group02 = new Group(mount02);
     group02.recruit(climber04);
     group02.recruit(climber05);
+    group02.groupMembers(climber04);
 
 
 
