@@ -8,18 +8,19 @@ public class Car extends Transport implements Repair{
 
  //public final int number;
  private int level;
+ private final int number;
 
 
    public Car (int number, String color, int level) {
-   this.number = number;//final
-   super(color);
-   super(level);
+       super(number, color, level);
+       this.number=number;
   }
 
-  @Override
-  public int getNumber();{
-         return number;
-     }
+  //@Override
+  //public void setNumber(int number);{
+  //       this.number = number;
+  //   }
+
 
     @Override
     public void repair(){

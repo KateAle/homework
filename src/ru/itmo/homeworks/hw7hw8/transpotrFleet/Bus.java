@@ -6,13 +6,13 @@ public class Bus extends Transport implements Repair{
 
     public boolean wifi;
     private int level;
+    private final String color;
 
 
     public Bus (int number, String color, boolean wifi, int level) {
-        super(number);
-        super(color);//final
+        super(number, color, level);
         this.wifi= wifi;
-        super(level);
+        this.color= color;
     }
     public Boolean getWifi(boolean wifi){
         return wifi;

@@ -10,11 +10,9 @@ public class Train extends Transport implements Repair{
 
 
     public Train (int number, String color, int wagon, int level) {
-        super(number);
-        super(level);
-        setColor(color);//final
+        super(number, color, level);
+        //setColor(color);//final
         setWagon(wagon);
-
     }
 
     public void setWagon(int wagon) {

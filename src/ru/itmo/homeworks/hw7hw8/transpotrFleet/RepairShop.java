@@ -49,11 +49,9 @@ public class RepairShop {
         colors[2] = "red";
         colors[3] = "black";
         colors[4] = "green";}
-    public String changeColor(Transport type){
+    public String changeColor(Transport type) {
         type.color = colors[(int) (Math.random() * 5)];
+        return type.color;
+    }
 }
 
-
-
-
-}
