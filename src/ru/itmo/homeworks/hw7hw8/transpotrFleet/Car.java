@@ -6,20 +6,21 @@ package ru.itmo.homeworks.hw7hw8.transpotrFleet;
 // У автомобиля должна быть возможность изменить цвет.
 public class Car extends Transport implements Repair{
 
- //public final int number;
+    //public final int number;
  private int level;
- private final int number;
+ public String color;
 
 
-   public Car (int number, String color, int level) {
-       super(number, color, level);
-       this.number=number;
+
+ public Car (int number, String color, int level) {
+       super(number, level);
+       setColor(color);
   }
 
-  //@Override
-  //public void setNumber(int number);{
-  //       this.number = number;
-  //   }
+
+        public void setColor(String color){
+        this.color = color;
+        }
 
 
     @Override
@@ -28,4 +29,11 @@ public class Car extends Transport implements Repair{
         if (level >0){
         this.level = level - 1;
     }}
+
+
+    public String changeColor() {
+        color = colors[(int) (Math.random() * 5)];
+        return color;
+    }
+
 }

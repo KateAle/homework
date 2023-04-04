@@ -3,12 +3,14 @@ package ru.itmo.homeworks.hw7hw8.transpotrFleet;
 abstract public class Transport {
     //protected String type;
     protected int level;
-    protected int number;
+    protected final int number;
     protected String color;
 
-    public Transport(int number, String color, int level) {
-        setColor(color);
-        setNumber(number);
+    public Transport(int number, int level) {
+        if (number <= 0) {
+            throw new IllegalArgumentException("Exception: number > 0 !");
+        }
+        else this.number= number;
         setLevel(level);
     }
 
@@ -18,21 +20,18 @@ abstract public class Transport {
         }
         this.type = type;
     }*/
-    public final void setNumber(int number){
+    public int getNumber(){
         if (number < 0) {
             throw new IllegalArgumentException("Exception: set number!");
         }
-        this.number = number;
+        return  number;
     }
-    public final void setColor(String color){
-        if (color == null || color.length() < 3) {
-            throw new IllegalArgumentException("Exception: color < 3");
-        }
-        this.color = color;
-    }
+
     public void setLevel(int level){
         //level=0;
         this.level = level;
     }
     abstract public void repair();
+
+
 }

@@ -9,8 +9,9 @@ public class Bus extends Transport implements Repair{
     private final String color;
 
 
+
     public Bus (int number, String color, boolean wifi, int level) {
-        super(number, color, level);
+        super(number, level);
         this.wifi= wifi;
         this.color= color;
     }

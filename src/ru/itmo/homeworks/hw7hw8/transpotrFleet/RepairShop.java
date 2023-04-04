@@ -12,46 +12,47 @@ package ru.itmo.homeworks.hw7hw8.transpotrFleet;
 // (случайный цвет выбирать из массива с названиями цветов). После ремонта все элементы массива с
 // транспортными средствами заменяются дефолтными значениями.
 
-public class RepairShop {
-    private Transport[] types;
-    private String[] colors;
-    private int i;
+public class RepairShop{
+    public Transport[] array;
+    //public final String[] colors =  {"white", "blue", "yellow", "green", "red"};
+    public int i;
 
-
-    public void setTypes(){
-        types = new Transport[10];
+    public RepairShop () {
+        array = new Transport[10];
     }
-    public void transport(Transport type) {
+
+    public void array(Transport type) {
         if (type == null) {
             System.out.println("В мастерской ремонтируют транспорт");
             return;
         }
 
-        if (types.length == /*>=*/ i) {
+        if (array.length == i) {
             System.out.println(type + "Все места заняты");
             return;
         }
-        types[i] = type;
+        array[i] = type;
         i++;
     }
-    // перебрать массив вызвать метод ремонт со своей реализацией
-    public void transportRepair(){
-        for ( i = 0; i == types.length-1; i++) {
-            types[i].repair();
-            types[i] = null;
-        }
 
+    // перебрать массив вызвать метод ремонт со своей реализацией
+    public void transportRepair() {
+        for (i = 0; i == array.length - 1; i++) {
+            array[i].repair();
+            array[i] = null;
+        }
     }
-    public void setColors(){
+    public void showArray(Transport[] array){
+        System.out.println(array.toString());
+    }
+}
+    /*public void setColors(){
         //colors =  {"white", "blue", "yellow", "green"};
         colors[0] = "blue";
         colors[1] = "yellow";
         colors[2] = "red";
         colors[3] = "black";
-        colors[4] = "green";}
-    public String changeColor(Transport type) {
-        type.color = colors[(int) (Math.random() * 5)];
-        return type.color;
-    }
-}
+        colors[4] = "green";}*/
+
+
 
