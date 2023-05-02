@@ -1,81 +1,52 @@
 package ru.itmo.coursework01;
 
+
 import java.text.SimpleDateFormat;
-import java.util.*;
 import java.time.*;
 
 public class Subscription {
-    private Type type;
+    public Type type;
     private final int number;
-    private LocalDate date1;
-    private LocalDate date2;
-    private final String name;
-    private final int year;
+    private LocalDate dateStart;
+    //private LocalDate date2;
+    //public int index;
+    public String owner;
 
-    public LocalDate getDate1() {
-        return date1;
-    }
-
-    public LocalDate getDate2() {
-        return date2;
-    }
-
-
-    //Calendar cl = Calendar. getInstance();
-
-
-    enum Type {ONE_DAY, MORNING, FULL}
-
-    public Subscription(Type type, int number, String start, String name, int year) { //Calendar date2,
+    public Subscription(int ownerId, Type type, String start) {
+        //this.owner = owner;
+        owner = Members.members[ownerId-1];
+        number = ownerId;
+        //index= number-1;
         this.type = type;
-        this.number = number;
-        date1 = LocalDate.parse(start);
+        //this.number = number;
+        //type = Type.getType();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        if (type == null) {
-            System.out.println("Укажите тип абонемента");
-        } else if (type == Type.ONE_DAY) {//бассейн и тренажерный зал с 8 до 22
-            date2 = date1;
-        }
-        if (type == Type.MORNING) {
-            date2 = date1.plusMonths(6);// абонемент действует 6 месяцев
-        }
-
-        if (type == Type.FULL) {//тренажерный зал, бассейн и групповые занятия с 8 до 22 часов.
-            date2 = date1.plusMonths(6);// абонемент действует 6 месяцев
-        }
-        this.name = name;
-        this.year = year;
+        dateStart = LocalDate.parse(start);
     }
+    public LocalDate getDateStart() {return dateStart;}
+//    public LocalDate getDate2() {
+//        date2 = type.getEndDate(getDate1());
+//        return date2;
+//    }
 
-    public Type getType() {
-        return type;
-    }
-
-    public void setDate1() {
-        this.date1 = date1;
-    }
-
-
-    public int getNumber() {
+   public String getOwner() {
+      return owner;
+   }
+   public int getNumber() {
         if (number < 0) {
             throw new IllegalArgumentException("Exception: у абонемента должен быть номер!");
         }
         return number;
     }
 
-
-    public String getName() {
-        if (name == null) {
-            throw new IllegalArgumentException("Exception: не указаны имя и фамилия владельца!");
-        }
-        return name;
+    public Type getType() {
+        return type;
     }
 
-    public int getYear() {
-        if (year < 0) {
-            throw new IllegalArgumentException("Exception: не указан год рождения!");
-        }
-        return year;
+    public void getInfo() {
+        System.out.println(getOwner());
+        System.out.println("Абонемент номер: "+getNumber()+"     Тип: "+ type);
+        System.out.println("Действует с "+ dateStart + " по "+ Type.getEndDate(type,dateStart));
     }
 
 }

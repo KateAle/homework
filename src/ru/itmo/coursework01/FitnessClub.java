@@ -12,7 +12,7 @@ public class FitnessClub {
     private int gi, pi, gri;//счетчики GYM, POOL, GROUP
 
 
-    enum Train {//вид тренировки
+    enum Training {//вид тренировки
         GYM, POOL, GROUP;
     }
     public FitnessClub(){
@@ -27,22 +27,21 @@ public class FitnessClub {
     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
     LocalTime now = LocalTime.now();
     LocalTime open = LocalTime.parse( "08:00" );
-    LocalTime close1 = LocalTime.parse( "16:00" );
-    LocalTime close = LocalTime.parse( "22:00" );
+    LocalTime close = LocalTime.parse( "23:00" );
 
 
-    public void training (Subscription sub,Train type) {
+    public void training (Subscription sub,Training train) {
         if (now.isBefore(open) && now.isAfter(close)) { // сравнить настоящее время и время работы
             System.out.println("Фитнес-клуб закрыт");
-        } else if (today.isAfter(sub.getDate2())) {// сравнить сегодня и дату окончания
+        } else if (today.isAfter(Type.getEndDate(sub.getType(),sub.getDateStart())) ){// сравнить сегодня и дату окончания
             System.out.println("Абонемент недействителен");
-        } else if (sub.getType() == Subscription.Type.ONE_DAY && type == Train.GROUP) {
+        } else if (sub.getType() == Type.ONE_DAY && train == Training.GROUP) {
             System.out.println("В абонемент не включено посещение групповых занятий");
-        } else if (sub.getType() == Subscription.Type.MORNING && type == Train.POOL) {
+        } else if (sub.getType() == Type.MORNING && train == Training.POOL) {
             System.out.println("В абонемент не включено посещение бассейна");
-        } else if (sub.getType() == Subscription.Type.MORNING && now.isAfter(close1)) {// сравнение времени для утреннего абон
+        } else if (sub.getType() == Type.MORNING && now.isAfter(sub.getType().getLimit(sub.getType()))) {// сравнение времени для утреннего абон
             System.out.println("Вы не можете посещать клуб после 16 часов");
-        } else if (type == Train.GROUP) {
+        } else if (train == Training.GROUP) {
             if (group.length == gri) {
                 System.out.println("Зал групповых занятий заполнен");
                 return;
@@ -50,7 +49,7 @@ public class FitnessClub {
             group[gri] = sub;
             gri++;
             System.out.println("Вы в зале групповых занятий");
-        } else if (type == Train.POOL) {
+        } else if (train == Training.POOL) {
             if (pool.length == /*>=*/ pi) {
                 System.out.println("Бассейн заполнен");
                 return;
@@ -58,7 +57,7 @@ public class FitnessClub {
             pool[pi] = sub;
             pi++;
             System.out.println("Вы в бассейне");
-        } else if (type == Train.GYM) {
+        } else if (train == Training.GYM) {
             if (gym.length == /*>=*/ gi) {
                 System.out.println("Тренажерный зал заполнен");
                 return;
