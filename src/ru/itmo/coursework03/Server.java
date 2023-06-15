@@ -25,11 +25,14 @@ public class Server{
                 try {
                     counter++;
                     socket = serverSocket.accept();
-                    System.out.println(" >> \" + \"Client No:\" + counter + \" подключен");
-                    ReadWrite connection = new ReadWrite(socket);
+                    System.out.println(" >> " + "Client No:" + counter + " подключен");
+                    try (ReadWrite connection = new ReadWrite(socket)){
                     connections.add(connection);
                     ThreadForConnection thread = new ThreadForConnection(connection, connections);
                     thread.start();
+                    } catch (IOException e){
+                        System.out.println("Ошибка во время создания объекта");
+                    }
                 }
                 catch (IOException e) {
                     System.out.println("Не удалось установить соединение с клиентом");
@@ -40,7 +43,7 @@ public class Server{
     }
 
     public static void main(String[] args) throws IOException {
-        Server server = new Server(3333);
+        Server server = new Server(2345);
         server.startServer();
     }
 }

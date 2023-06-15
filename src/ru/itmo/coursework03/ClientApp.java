@@ -13,49 +13,50 @@ public class ClientApp {
 
     public void run() {
         Scanner scanner = new Scanner(System.in);
-        try (Socket socket = new Socket(remote.getHostString(), remote.getPort())){
-            try (ReadWrite readWrite = new ReadWrite(socket)){
-            System.out.println("Подключение к серверу...");
-            Thread sendToServer = new Thread(() -> {
-                    System.out.println("Введите текст или /exit для выхода");
-                    while (true) {
-                        String text = scanner.nextLine();
-                        if ("/exit".equalsIgnoreCase(text)) return;
+        System.out.println("Введите текст или /exit для выхода");
+        while (true) {
+            String text = scanner.nextLine();
+            if ("/exit".equalsIgnoreCase(text)) return;
+            try (Socket socket = new Socket(remote.getHostString(), remote.getPort())) {
+                try (ReadWrite readWrite = new ReadWrite(socket)) {
+                    System.out.println("Создан объект ReadWrite");
+                   Thread sendToServer = new Thread(() -> {
                         try {
                             Message message = new Message(text);
                             readWrite.writeMessage(message);
+                            System.out.println("Сообщение отправлено");
                         } catch (IOException e) {////////////////////////////////////////////
-                            System.out.println("Сервер не отвечает");
+                            System.out.println("Не удалось отправить сообщение");
                         }
-                    }
-                }); sendToServer.start();
+                   });sendToServer.start();
 
-            Thread readFromServer = new Thread(() -> {
-                    while (true) {
+                   Thread readFromServer = new Thread(() -> {
                         try {
                             Message fromServer = readWrite.readMessage();
                             System.out.println(fromServer.getText());
-                        } catch (UnknownHostException e) {
-                            System.out.println("Ошибка в IP сервера");///////////////////////////////////////////
-                        } catch (IOException e) {
-                            System.out.println("Сервер не отвечает");//////////////////////////////////////////
+                        } catch (IOException e) {////////////////////////////////////////////
+                            System.out.println("Не удалось принять сообщение");
                         }
-                    }
-                }); readFromServer.start();
-          }catch (IOException e) {////////////////////////////////////////////
-               System.out.println("Не удалось создать объект ReadWrite");}
-
-        } catch (UnknownHostException e) {
-            System.out.println("Ошибка IP сервера");
-        } catch (IOException e) {
-            System.out.println("Сервер не отвечает");
+                   });readFromServer.start();
+                } catch (IOException e) {////////////////////////////////////////////
+                    System.out.println("Не удалось создать объект ReadWrite");
+                }
+            } catch (UnknownHostException e) {
+                    System.out.println("Ошибка в IP сервера");///////////////////////////////////////////
+                } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
-    }
+
+
+        }
+
+
 
 
     public static void main(String[] args) {
         String ip = "127.0.0.1";
-        int port = 3333;
+        int port = 2345;
         InetSocketAddress remote = new InetSocketAddress(ip, port);
         ClientApp clientApp = new ClientApp(remote);
         clientApp.run();
