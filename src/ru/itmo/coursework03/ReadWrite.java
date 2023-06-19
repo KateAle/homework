@@ -5,10 +5,12 @@ import java.io.*;
 import java.net.Socket;
 import java.time.LocalDateTime;
 
+
 public class ReadWrite implements AutoCloseable{
     private Socket socket;
     private ObjectInputStream input;
     private ObjectOutputStream output;
+    private BufferedReader br;
 
     public ReadWrite(Socket socket) throws IOException {
         output = new ObjectOutputStream(socket.getOutputStream());
@@ -29,7 +31,6 @@ public class ReadWrite implements AutoCloseable{
         output.writeObject(message);
         output.flush();
     }
-
     @Override
     public void close()  {
         try {
@@ -37,8 +38,9 @@ public class ReadWrite implements AutoCloseable{
             output.close();
             socket.close();
         } catch (IOException e) {
-            System.out.println("Ошибка закрытия ресурсов. " +
-                    "Например, обрыв соединения произошел по время закрытия");
+            System.out.println("Ошибка закрытия ресурсов");
+
         }
     }
 }
+
