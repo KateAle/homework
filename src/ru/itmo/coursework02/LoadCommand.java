@@ -7,7 +7,7 @@ public class LoadCommand implements Command{
         this.game = game;
     }
     @Override
-    public void execute() {
-        game.load();
+    public void execute(User user) {
+        game.load(user);
     }
 }

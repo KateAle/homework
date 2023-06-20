@@ -7,7 +7,7 @@ class SaveCommand implements Command{
         this.game = game;
     }
     @Override
-    public void execute() {
-        game.save();
+    public void execute(User user) {
+        game.save(user);
     }
 }

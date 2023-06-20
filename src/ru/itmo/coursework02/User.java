@@ -1,8 +1,6 @@
 package ru.itmo.coursework02;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.Objects;
 
 public class User implements Serializable {
     Command start;
@@ -13,7 +11,7 @@ public class User implements Serializable {
     String pwd;
     ObjectOutputStream output;
     ObjectInputStream input;
-    private String path = "/Users/air/Documents/ Наша папка/JAVA/homework/src/ru/itmo/coursework02/";
+   // private String path = "/Users/air/Documents/ Наша папка/JAVA/homework/src/ru/itmo/coursework02/";
 
 
     public User(Command start, Command load, Command save, Command exit, String login, String pwd) {
@@ -33,16 +31,16 @@ public class User implements Serializable {
         return pwd;
     }
     void startGame(){
-        start.execute();
+        start.execute(this);
     }
     void loadGame(){
-        load.execute();
+        load.execute(this);
     }
     void saveGame(){
-        save.execute();
+        save.execute(this);
     }
     void exitGame(){
-        exit.execute();
+        exit.execute(this);
     }
 
 }

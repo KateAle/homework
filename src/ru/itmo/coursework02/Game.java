@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Game implements Serializable{
     //public static HashMap<String, String> users = new HashMap<>();
-    /////private String path = "/Users/air/Documents/ Наша папка/JAVA/homework/src/ru/itmo/coursework02/";
+    private String path = "/Users/air/Documents/ Наша папка/JAVA/homework/src/ru/itmo/coursework02/";
     ObjectOutputStream output;
     ObjectInputStream input;
     //User u;
@@ -155,22 +155,22 @@ public class Game implements Serializable{
             }
         }
 
- Game load(){//// не понимаю, как передать сюда состояние игры или юзера, приходит 0
-       // u.input.readObject();
-     Game game;
+void load(User user){
+
        try {
-           input = new ObjectInputStream(new FileInputStream(/*path+u.getLogin()+ u.getPwd()+*/"Game.txt"));
-           game = (Game) input.readObject();
+           input = new ObjectInputStream(new FileInputStream(path+user.getLogin()+ user.getPwd()+".txt"));
+           user = (User) input.readObject();
        } catch (IOException | ClassNotFoundException e) {
            throw new RuntimeException(e);
-    } return game;
+    }
 }
-     void save() { //----//-----//
+     void save(User user) {
        try {
-           output = new ObjectOutputStream(new FileOutputStream(/*path + u.getLogin()+ u.getPwd() + */"Game.txt"));
-           //output.writeObject();
+           output = new ObjectOutputStream(new FileOutputStream(path+user.getLogin()+ user.getPwd()+".txt"));
+          output.writeObject(user);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+           System.out.println("ошибка");
+           throw new RuntimeException(e);
         }
      }
 
@@ -181,28 +181,3 @@ public class Game implements Serializable{
          System.exit(0);
      }
  }
-
- /*System.out.println(realStep.getTitle() + realStep.getDesc() +
-                        realStep.getNxtStp1() + realStep.getNxtStp2());
-
-                if (!(realStep.getNxtStp1() == null)) {// если след шаг = 0, то игра завершена
-                    System.out.println("\n выберите 1..2 \n" + "0 - для выхода в меню\n");
-                    String scn = scanner.nextLine();
-                    if (scn.equals("1")) {
-                        for (Step step : Step.steps) {
-                            if (realStep.getNxtStp1().equals(step.getTitle())) {
-                                realStep = step;
-                            } else {
-                                realStep = null;
-                            }
-                        }
-                    } else if (scn.equals("2")) {
-                        for (Step step : Step.steps) {
-                            if (realStep.getNxtStp2().equals(step.getTitle())) {
-                                realStep = step;
-                            } else {
-                                realStep = null;
-                            }
-                        }
-                    } else if (scn.equals("0")) break;
-*/

@@ -1,5 +1,5 @@
 package ru.itmo.coursework02;
 
 public interface Command {
-    void execute();
+    void execute(User user);
 }

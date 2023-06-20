@@ -6,7 +6,7 @@ public  class StartCommand implements Command{
         this.game = game;
     }
     @Override
-    public void execute() {
+    public void execute(User user) {
         game.start();
     }
 }
