@@ -23,6 +23,7 @@ public class User implements Serializable {
         this.exit = exit;
         this.login = login;
         this.pwd=pwd;
+
     }
 
     public String getLogin() {
