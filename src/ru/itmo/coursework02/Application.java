@@ -1,10 +1,11 @@
 package ru.itmo.coursework02;
+import java.io.IOException;
 import java.util.Scanner;
 
-public class GameApp {
+public class Application {
 
 
- public static void main(String[] args) {
+ public static void main(String[] args) throws IOException {
         Game g = new Game();
 
         Scanner scanner = new Scanner(System.in);
@@ -13,7 +14,7 @@ public class GameApp {
         System.out.println("Введите пароль: ");
         String password = scanner.nextLine();
 
-        User u = new User(new StartCommand(g), new LoadCommand(g), new SaveCommand(g), new ExitCommand(g), login, password);
+        User u = new User(new StartCommand(g),  new ContCommand(g), new LoadCommand(g), new SaveCommand(g), new ExitCommand(g), login, password, g);
 
             Scanner sc = new Scanner(System.in);
             System.out.println("\n--- МЕНЮ ---\n\n" +
@@ -32,14 +33,15 @@ public class GameApp {
                 u.exitGame();
             }
 
-        while (true){
+      while (true){
             sc = new Scanner(System.in);
 
         System.out.println("\n--- МЕНЮ ---\n\n" +
                 "1. Новая игра\n" +
-                "2. Загрузить\n" +
-                "3. Сохранить\n" +
-                "4. Выйти\n\n" +
+                "2. Продолжить\n" +
+                "3. Загрузить\n" +
+                "4. Сохранить\n" +
+                "5. Выйти\n\n" +
                 "Введите 1..4 для выбора\n");
 
         menu = sc.nextLine();
@@ -47,16 +49,18 @@ public class GameApp {
         if (menu.equals("1")) {
             u.startGame();
         } else if (menu.equals("2")) {
-            u.loadGame();
+            u.contGame();
         } else if (menu.equals("3")) {
-            u.saveGame();
+            u.loadGame();
         } else if (menu.equals("4")) {
+            u.saveGame();
+        } else if (menu.equals("5")) {
             u.exitGame();
         }
         }
-    }
+    }}
 
-}
+
 
 //u.addUser();
 // users.forEach((key, value) -> System.out.println(key + " " + value));
