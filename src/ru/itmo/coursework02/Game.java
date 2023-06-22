@@ -115,11 +115,10 @@ public class Game implements Serializable{
            System.out.println(realStep.getTitle() + realStep.getDesc());
            if (realStep.getNxtStp1() != null) {
                System.out.println(realStep.getNxtStp1() + realStep.getNxtStp2());
-               System.out.println("\n выберите 1..2 \n" + "0 - для выхода в меню\n");
-
+               System.out.println("\n выберите 1..2 \n" + "0 - для выхода в меню\n");}
+           else {break;};
            String scn = scanner.nextLine();
-           if (scn.equals("0")) {
-               break;
+           if (scn.equals("0")) {return realStep;
            }
            switch (scn) {
                case "1":
@@ -129,9 +128,9 @@ public class Game implements Serializable{
                                realStep = step;
                               break;
                            }
-                       } //else {break;}
-                   }
-                   break;
+                       } else {break;
+                       }
+                   } break;
                case "2":
                    for (Step step : steps) {
                        if (realStep.getNxtStp2() != null) {
@@ -139,12 +138,12 @@ public class Game implements Serializable{
                                realStep = step;
                                break;
                            }
-                       } //else {break;}
+                       } else {break;}
                    }
                    break;
                // case "0": break ;
            }
-       } }return realStep;
+        }return realStep;
    }
 
     void start(User u) throws IOException {

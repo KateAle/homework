@@ -1,9 +1,10 @@
 package ru.itmo.coursework02;
 
+import java.io.Serializable;
 import java.sql.Array;
 import java.util.*;
 
-public class Step {
+public class Step implements Serializable {
     private String title;
     private String desc;
     private String nxtStp1;
