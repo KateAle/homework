@@ -47,7 +47,7 @@ public class Application {
         FitnessClub fitnessClub = new FitnessClub();
         //fitnessClub.training(sub01, FitnessClub.Training.GYM);
         sub10.getInfo();
-        System.out.println(sub09.getType().getLimit(sub09.getType()));
+        System.out.println(sub09.getType().getEnd());
 
        fitnessClub.training(sub02, FitnessClub.Training.POOL);
         fitnessClub.training(sub03, FitnessClub.Training.GROUP);

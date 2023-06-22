@@ -8,26 +8,22 @@ public class Subscription {
     public Type type;
     private final int number;
     private LocalDate dateStart;
-    //private LocalDate date2;
-    //public int index;
+    private LocalDate dateEnd;
+
     public String owner;
 
     public Subscription(int ownerId, Type type, String start) {
-        //this.owner = owner;
         owner = Members.members[ownerId-1];
         number = ownerId;
-        //index= number-1;
         this.type = type;
-        //this.number = number;
-        //type = Type.getType();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         dateStart = LocalDate.parse(start);
+        dateEnd = dateStart.plusDays(type.getLimit());
     }
     public LocalDate getDateStart() {return dateStart;}
-//    public LocalDate getDate2() {
-//        date2 = type.getEndDate(getDate1());
-//        return date2;
-//    }
+
+    public LocalDate getDateEnd(LocalDate dateStart){
+        return dateStart.plusDays(type.getLimit());}
 
    public String getOwner() {
       return owner;
@@ -46,7 +42,7 @@ public class Subscription {
     public void getInfo() {
         System.out.println(getOwner());
         System.out.println("Абонемент номер: "+getNumber()+"     Тип: "+ type);
-        System.out.println("Действует с "+ dateStart + " по "+ Type.getEndDate(type,dateStart));
+        System.out.println("Действует с "+ dateStart + " по "+ dateEnd );//dateStart.plusDays(type.getLimit())
     }
 
 }

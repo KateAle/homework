@@ -33,13 +33,13 @@ public class FitnessClub {
     public void training (Subscription sub,Training train) {
         if (now.isBefore(open) && now.isAfter(close)) { // сравнить настоящее время и время работы
             System.out.println("Фитнес-клуб закрыт");
-        } else if (today.isAfter(Type.getEndDate(sub.getType(),sub.getDateStart())) ){// сравнить сегодня и дату окончания
+        } else if (today.isAfter(sub.getDateEnd(sub.getDateStart())) ){// сравнить сегодня и дату окончания
             System.out.println("Абонемент недействителен");
         } else if (sub.getType() == Type.ONE_DAY && train == Training.GROUP) {
             System.out.println("В абонемент не включено посещение групповых занятий");
         } else if (sub.getType() == Type.MORNING && train == Training.POOL) {
             System.out.println("В абонемент не включено посещение бассейна");
-        } else if (sub.getType() == Type.MORNING && now.isAfter(sub.getType().getLimit(sub.getType()))) {// сравнение времени для утреннего абон
+        } else if (sub.getType() == Type.MORNING && now.isAfter(Type.MORNING.getEnd())) {// сравнение времени для утреннего абон
             System.out.println("Вы не можете посещать клуб после 16 часов");
         } else if (train == Training.GROUP) {
             if (group.length == gri) {
